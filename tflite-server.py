@@ -23,8 +23,8 @@ SCENE_URL = "/v1/vision/scene"
 FACE_MODEL = "models/face_detection/mobilenet_ssd_v2_face/mobilenet_ssd_v2_face_quant_postprocess.tflite"
 OBJ_MODEL = "models/object_detection/mobilenet_ssd_v2_coco/mobilenet_ssd_v2_coco_quant_postprocess.tflite"
 OBJ_LABELS = "models/object_detection/mobilenet_ssd_v2_coco/coco_labels.txt"
-SCENE_MODEL = "models/classification/dogs-vs-cats/model.tflite"
-SCENE_LABELS = "models/classification/dogs-vs-cats/labels.txt"
+SCENE_MODEL = "models/classification/inception-v4/inception_v4_299_quant.tflite"
+SCENE_LABELS = "models/classification/inception-v4/imagenet_labels.txt"
 
 # Setup object detection
 obj_interpreter = tflite.Interpreter(model_path=OBJ_MODEL)
