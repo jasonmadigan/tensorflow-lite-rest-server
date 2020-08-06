@@ -149,11 +149,18 @@ async def predict_scene(image: UploadFile = File(...)):
         contents = await image.read()
         image = Image.open(io.BytesIO(contents))
         resized_image = image.resize((scene_input_width, scene_input_height), Image.ANTIALIAS)
-        results = classify_image(scene_interpreter, image=resized_image)
-        label_id, prob = results[0]
+        results = classify_image(scene_interpreter, image=resized_image, top_k=1000)
+
+        classifications = []
+        for i in range(len(results)):
+            object = {}
+            object["label"] = scene_labels[results[i][0]]
+            object["confidence"] = results[i][1]
+            if object["confidence"] > 0:
+                classifications.append(object)
+
         data = {}
-        data["label"] = scene_labels[label_id]
-        data["confidence"] = prob
+        data["predictions"] = classifications
         data["success"] = True
         return data
     except:
